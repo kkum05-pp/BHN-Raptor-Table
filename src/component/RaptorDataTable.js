@@ -5,6 +5,8 @@ import './table.css'
 import { Checkbox } from './Checkbox'
 import { ColumnFilter } from './ColumnFilter'
 import DatePicker from "react-datepicker";  
+import 'core-js/stable';
+import 'regenerator-runtime/runtime'
   
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -54,6 +56,7 @@ export const RaptorTable = (props) => {
   const data = useMemo(() => props.data, [])
 
   const [selectedDate,setSelectedDate] = useState(null)
+  if(columns !== null && columns !== undefined && columns !== ""){
   columns.forEach((value )=> {
     if(value.type == 'dropDown'){
     value.Filter = SelectColumnFilter
@@ -63,6 +66,7 @@ export const RaptorTable = (props) => {
     value.filter = dateBetweenFilterFn
   }
   })
+}
 
   // function DateColumnFilter({
   //   column: { filterValue, setFilter, preFilteredRows, id }
@@ -190,8 +194,8 @@ export const RaptorTable = (props) => {
     setPageSize,
     state: { pageIndex, pageSize }
   } = useTable({
-    columns,
-    data,
+    columns: columns ? columns :[] ,
+    data : data ? data : '',
   //  defaultColumn,
   defaultColumn: { Filter: DefaultColumnFilter },
     initialState: { pageIndex : 0 }
@@ -207,8 +211,12 @@ export const RaptorTable = (props) => {
   return (
     <>
       <div>
+        <p>{props.msg ? props.msg : ''}</p>
         <div>
-          <Checkbox {...getToggleHideAllColumnsProps()} /> Toggle All
+          <Checkbox 
+            data-testid="cbShowHide"
+            {...getToggleHideAllColumnsProps()} 
+            /> Toggle All
         </div>
         {allColumns.map(column => (
           <div key={column.id}>

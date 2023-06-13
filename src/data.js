@@ -1,5 +1,5 @@
 export default function valueData(){
-    return valueData = [
+    const valueData1 = [
         {
         "id": 1,
         "system": "keystone",
@@ -131,4 +131,5 @@ export default function valueData(){
                                                 "date": "12/11/2022"
                                                 }
     ]
+    return valueData1;
 }

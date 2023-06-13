@@ -49,7 +49,8 @@ function App() {
   const data = valueData();
   return (
     <div className='App'>
-     <RaptorTable
+     <div>My Raptor App</div>
+     <RaptorTable data-testid="child"
         defaultPageSize={10}
         filterable={true}
         minRows={3}
@@ -57,8 +58,7 @@ function App() {
         noDataText="No data found"
         columns={columns}
         transactionTypeMessage={'React Data'}
-        copyRowJSONRequired={true}
-        searchType='blast'
+        
       />
 
     </div>
